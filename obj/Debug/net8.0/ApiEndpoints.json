@@ -1,5 +1,37 @@
 [
   {
+    "ContainingType": "AccountsService.Controllers.InternalAccountsController",
+    "Method": "GetVehicleById",
+    "RelativePath": "api/InternalAccounts/vehicle/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "AccountsService.Controllers.InternalAccountsController",
+    "Method": "GetWorkerById",
+    "RelativePath": "api/InternalAccounts/worker/{id}",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "AccountsService.Controllers.VehicleController",
     "Method": "VehicleList",
     "RelativePath": "api/Vehicle/get-all",

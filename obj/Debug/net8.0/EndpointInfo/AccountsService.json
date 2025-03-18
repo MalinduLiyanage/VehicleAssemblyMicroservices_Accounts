@@ -5,6 +5,52 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/InternalAccounts/vehicle/{id}": {
+      "post": {
+        "tags": [
+          "InternalAccounts"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/InternalAccounts/worker/{id}": {
+      "post": {
+        "tags": [
+          "InternalAccounts"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/Vehicle/get-all": {
       "post": {
         "tags": [

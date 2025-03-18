@@ -3,6 +3,7 @@ using AccountsService;
 using Microsoft.EntityFrameworkCore;
 using AccountsService.Services.VehicleService;
 using AccountsService.Services.WorkerService;
+using AccountsService.Services.InternalAccountsService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,6 +22,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 // Add services to the container.
 builder.Services.AddScoped<IVehicleService, VehicleService>();
 builder.Services.AddScoped<IWorkerService, WorkerService>();
+builder.Services.AddScoped<IInternalAccountsService, InternalAccountsService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
