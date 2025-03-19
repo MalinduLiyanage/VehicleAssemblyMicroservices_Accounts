@@ -5,6 +5,7 @@ using AccountsService.Services.VehicleService;
 using AccountsService.Services.WorkerService;
 using AccountsService.Services.InternalAccountsService;
 using AccountsService.Services.ValidationService;
+using AccountsService.Utilities.CommunicationClientUtility;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,11 @@ var user = Environment.GetEnvironmentVariable("DB_USER");
 var password = Environment.GetEnvironmentVariable("DB_PASSWORD");
 //var connectionString = $"Server={server};Port={port};Database={database};User={user};Password={password};";
 var connectionString = $"Server=localhost;Port=3306;Database=vehicleaccountsdb;User=root;Password=;";
+
+builder.Services.AddHttpClient<CommunicationClientUtility>(client =>
+{
+    client.BaseAddress = new Uri("http://localhost:5025");
+});
 
 GlobalAttributes.mySQLConfig.connectionString = connectionString;
 builder.Services.AddDbContext<ApplicationDbContext>(options =>

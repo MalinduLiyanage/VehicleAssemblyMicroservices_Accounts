@@ -1,14 +1,18 @@
 ﻿using AccountsService.DTOs;
+using AccountsService.Utilities.CommunicationClientUtility;
+using Microsoft.EntityFrameworkCore;
 
 namespace AccountsService.Services.InternalAccountsService
 {
     public class InternalAccountsService : IInternalAccountsService
     {
         private readonly ApplicationDbContext context;
+        private readonly CommunicationClientUtility communicationClientUtility;
 
-        public InternalAccountsService(ApplicationDbContext context)
+        public InternalAccountsService(ApplicationDbContext context, CommunicationClientUtility communicationClientUtility)
         {
             this.context = context;
+            this.communicationClientUtility = communicationClientUtility;
         }
 
         public VehicleDTO GetVehicleById(int id)
@@ -40,11 +44,11 @@ namespace AccountsService.Services.InternalAccountsService
             }
         }
 
-        public WorkerDTO GetWorkerById(int id)
+        public async Task<WorkerDTO> GetWorkerById(int id)
         {
             try
             {
-                var worker = context.workers
+                var worker = await context.workers
                     .Where(a => a.NIC == id)
                     .Select(a => new WorkerDTO
                     {
@@ -54,23 +58,33 @@ namespace AccountsService.Services.InternalAccountsService
                         email = a.email,
                         address = a.address,
                         job_role = a.job_role,
+                        Assemblies = new List<AssembleDTO>()  // Initialize the Assemblies list
                     })
-                    .FirstOrDefault();
+                    .FirstOrDefaultAsync();  // Use FirstOrDefaultAsync for async database access
 
                 if (worker != null)
                 {
+                    // Fetch assemblies asynchronously
+                    var assemblies = await communicationClientUtility.GetWorkerAssemblyData(id);
+
+                    if (assemblies != null && assemblies.Any())
+                    {
+                        worker.Assemblies = assemblies;  // Populate Assemblies if available
+                    }
+
                     return worker;
                 }
-                else
-                {
-                    return null;
-                }
+
+                return null;  // Return null if worker not found
             }
             catch (Exception ex)
             {
-                return null;
+                // Log the exception here if necessary
+                return null;  // Return null on error
             }
         }
+
+
 
     }
 }

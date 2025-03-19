@@ -28,16 +28,17 @@ namespace AccountsService.Controllers
         }
 
         [HttpPost("worker/{id}")]
-        public IActionResult GetWorkerById(int id)
+        public async Task<IActionResult> GetWorkerById(int id)
         {
-            var result = internalAccountsService.GetWorkerById(id);
+            var result = await internalAccountsService.GetWorkerById(id); 
 
             if (result == null)
             {
                 return NotFound(new { message = "Worker not found" });
             }
 
-            return Ok(result);
+            return Ok(result); 
         }
+
     }
 }

@@ -10,5 +10,6 @@ namespace AccountsService.DTOs
         public string? email { get; set; }
         public string? address { get; set; }
         public string? job_role { get; set; }
+        public List<AssembleDTO>? Assemblies { get; set; }
     }
 }
