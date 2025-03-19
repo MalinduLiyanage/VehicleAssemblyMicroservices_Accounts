@@ -1,4 +1,6 @@
-﻿namespace AccountsService.DTOs
+﻿using AccountsService.Utilities.ValidationAttributes;
+
+namespace AccountsService.DTOs
 {
     public class WorkerDTO
     {

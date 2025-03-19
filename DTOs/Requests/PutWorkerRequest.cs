@@ -1,7 +1,10 @@
-﻿namespace AccountsService.DTOs.Requests
+﻿using AccountsService.Utilities.ValidationAttributes;
+
+namespace AccountsService.DTOs.Requests
 {
     public class PutWorkerRequest
     {
+        [WorkerValidation]
         public int NIC { get; set; }
         public string? firstname { get; set; }
         public string? lastname { get; set; }

@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AccountsService.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class WorkerController : ControllerBase
     {
         private readonly IWorkerService workerService;

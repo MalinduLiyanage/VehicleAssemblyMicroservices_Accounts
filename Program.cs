@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using AccountsService.Services.VehicleService;
 using AccountsService.Services.WorkerService;
 using AccountsService.Services.InternalAccountsService;
+using AccountsService.Services.ValidationService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddScoped<IVehicleService, VehicleService>();
 builder.Services.AddScoped<IWorkerService, WorkerService>();
 builder.Services.AddScoped<IInternalAccountsService, InternalAccountsService>();
+builder.Services.AddScoped<ICreateWorkerValidationService, CreateWorkerValidationService>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
