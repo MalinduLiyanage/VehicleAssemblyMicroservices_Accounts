@@ -19,7 +19,6 @@ var connectionString = $"Server=localhost;Port=3306;Database=vehicleaccountsdb;U
 
 builder.Services.AddHttpClient<CommunicationClientUtility>(client =>
 {
-    client.BaseAddress = new Uri("http://localhost:5025");
 });
 
 GlobalAttributes.mySQLConfig.connectionString = connectionString;
