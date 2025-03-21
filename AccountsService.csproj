@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
-    <DockerfileContext>..\..\VehicleAssemblyMicroservices</DockerfileContext>
+    <UserSecretsId>e33b7019-b98b-4abc-a348-e7c87db2f9a6</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
