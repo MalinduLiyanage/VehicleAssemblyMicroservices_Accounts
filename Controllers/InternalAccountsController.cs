@@ -1,4 +1,5 @@
-﻿using AccountsService.Services.InternalAccountsService;
+﻿using AccountsService.DTOs;
+using AccountsService.Services.InternalAccountsService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AccountsService.Controllers
@@ -17,7 +18,7 @@ namespace AccountsService.Controllers
         [HttpPost("vehicle/{id}")]
         public IActionResult GetVehicleById(int id)
         {
-            var result = internalAccountsService.GetVehicleById(id);
+            VehicleDTO result = internalAccountsService.GetVehicleById(id);
 
             if (result == null)
             {
@@ -30,7 +31,7 @@ namespace AccountsService.Controllers
         [HttpPost("worker/{id}")]
         public async Task<IActionResult> GetWorkerById(int id)
         {
-            var result = await internalAccountsService.GetWorkerById(id); 
+            WorkerDTO result = await internalAccountsService.GetWorkerById(id); 
 
             if (result == null)
             {

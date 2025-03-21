@@ -1,5 +1,5 @@
 ﻿using System.Text.Json;
-using AccountsService.DTOs;  // Make sure AssembleDTO exists here
+using AccountsService.DTOs; 
 using System.Net.Http;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
@@ -11,7 +11,7 @@ namespace AccountsService.Utilities.CommunicationClientUtility
     public class CommunicationClientUtility
     {
         private readonly HttpClient httpClient;
-        private readonly string assemblyServiceWorkerUrl;
+        private readonly string? assemblyServiceWorkerUrl;
 
         public CommunicationClientUtility(HttpClient httpClient, IConfiguration configuration)
         {
@@ -21,18 +21,19 @@ namespace AccountsService.Utilities.CommunicationClientUtility
 
         public async Task<List<AssembleDTO>> GetWorkerAssemblyData(int id)
         {
-            var response = await httpClient.PostAsJsonAsync($"{assemblyServiceWorkerUrl}{id}", new { id });
+            HttpResponseMessage response = await httpClient.PostAsJsonAsync($"{assemblyServiceWorkerUrl}{id}", new { id });
 
             if (response.StatusCode == HttpStatusCode.NotFound)
             {
-                return null;  // Return null if no assemblies are found
+                return new List<AssembleDTO>(); 
             }
 
             response.EnsureSuccessStatusCode();
 
-            var content = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<List<AssembleDTO>>(content);  // Deserialize into List<AssembleDTO>
+            string content = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<List<AssembleDTO>>(content) ?? new List<AssembleDTO>(); 
         }
+
 
     }
 }

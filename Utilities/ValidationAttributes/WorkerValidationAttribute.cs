@@ -15,7 +15,7 @@ namespace AccountsService.Utilities.ValidationAttributes
                 return new ValidationResult("All fields are required.");
             }
 
-            ICreateWorkerValidationService validationService = (ICreateWorkerValidationService)validationContext.GetService(typeof(ICreateWorkerValidationService));
+            ICreateWorkerValidationService? validationService = validationContext.GetService(typeof(ICreateWorkerValidationService)) as ICreateWorkerValidationService;
 
             if (validationService == null)
             {

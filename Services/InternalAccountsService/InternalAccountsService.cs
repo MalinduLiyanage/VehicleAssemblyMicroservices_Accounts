@@ -19,7 +19,7 @@ namespace AccountsService.Services.InternalAccountsService
         {
             try
             {
-                var vehicle = context.vehicles
+                VehicleDTO? vehicle = context.vehicles
                     .Where(a => a.vehicle_id == id)
                     .Select(a => new VehicleDTO
                     {
@@ -38,7 +38,7 @@ namespace AccountsService.Services.InternalAccountsService
                     return null;
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return null;
             }
@@ -48,7 +48,7 @@ namespace AccountsService.Services.InternalAccountsService
         {
             try
             {
-                var worker = await context.workers
+                WorkerDTO? worker = await context.workers
                     .Where(a => a.NIC == id)
                     .Select(a => new WorkerDTO
                     {
@@ -58,29 +58,27 @@ namespace AccountsService.Services.InternalAccountsService
                         email = a.email,
                         address = a.address,
                         job_role = a.job_role,
-                        Assemblies = new List<AssembleDTO>()  // Initialize the Assemblies list
+                        Assemblies = new List<AssembleDTO>() 
                     })
-                    .FirstOrDefaultAsync();  // Use FirstOrDefaultAsync for async database access
+                    .FirstOrDefaultAsync();  
 
                 if (worker != null)
                 {
-                    // Fetch assemblies asynchronously
-                    var assemblies = await communicationClientUtility.GetWorkerAssemblyData(id);
+                    List<AssembleDTO> assemblies = await communicationClientUtility.GetWorkerAssemblyData(id);
 
                     if (assemblies != null && assemblies.Any())
                     {
-                        worker.Assemblies = assemblies;  // Populate Assemblies if available
+                        worker.Assemblies = assemblies;
                     }
 
                     return worker;
                 }
 
-                return null;  // Return null if worker not found
+                return null;  
             }
-            catch (Exception ex)
+            catch (Exception)
             {
-                // Log the exception here if necessary
-                return null;  // Return null on error
+                return null;  
             }
         }
 
